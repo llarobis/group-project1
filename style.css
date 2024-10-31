@@ -38,7 +38,7 @@ input[type="date"]{
 }
 
 input[type="date"]:focus {
-  border-color: #ff808e;
+  border-color: #FF6962;
   outline: none;
 }
 
@@ -48,14 +48,14 @@ input[type="text"]{
   border: 1px solid;
   border-radius: 5px;
   font-size: 16px;
-
 }
 
-  border-color: #ff808e;
+input[type="text"]:focus{
+  border-color: #FF6962;
   outline: none;
 }
 
-textarea[type="text"]{
+textarea[id="modal-description"]{
   width: 100%;
   padding: 10px;
   border: 1px solid;
@@ -64,7 +64,7 @@ textarea[type="text"]{
 
 }
 
-textarea[type="text"]:focus {
+textarea[id="modal-description"]:focus {
   border-color: #ff808e;
   outline: none;
 }
