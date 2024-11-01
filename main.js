@@ -89,9 +89,62 @@
  }
 
  // Function to save the to-do list to local storage
- function saveToLocalStorage() {
-     localStorage.setItem("todoItems", JSON.stringify(todoItems));
- }
+ 
+
+document.addEventListener('DOMContentLoaded', function () {
+    const assignName = document.querySelector('#modal-name');
+    const addDescription = document.querySelector('#modal-description');
+    const createButton = document.getElementById('create');
+    const addDate = document.querySelector ('#modal-date');
+    const modal = document.querySelector ('#my-modal');
+
+
+if (createButton) {
+    createButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        
+       
+        const name = assignName.value;
+        const description = addDescription.value;
+        const date = addDate.value;
+
+    
+        localStorage.setItem('modal-name', name);
+        localStorage.setItem('modal-description', description);
+        localStorage.setItem('modal-date', date);
+
+       
+
+        renderLastRegistered(); 
+        
+    });
+}
+
+
+
+    function renderLastRegistered() {
+        const name = localStorage.getItem('modal-name');
+        const description = localStorage.getItem('modal-description');
+        const date = localStorage.getItem('modal-date');
+
+    
+        assignName.textContent = name;
+        addDescription.textContent = description;
+        addDate.textContent = date;
+        
+    
+        console.log('Name:', name);
+        console.log('Description:', description);
+        console.log('Date', date);
+    }
+
+    const readLocalStorage = function () {
+        const name = localStorage.getItem('modal-name');
+        console.log('Name from readLocalStorage:', name);
+    };
+    readLocalStorage();
+});
+
 
  // Event Listener for "Create New To-Do Item" Button
  document.getElementById("createTodoBtn").addEventListener("click", () => {
