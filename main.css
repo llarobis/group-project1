@@ -1,9 +1,4 @@
-.main-page {
-    padding: 20px;
-    max-width: 600px;
-    margin: auto;
-}
-.weekly-view, .todo-list {
+.todo-list {
     background-color: #fF6962;
     border-radius: 8px;
     padding: 10px;
@@ -15,7 +10,6 @@
     background-color: #FFD6D4;
     border-radius: 8px;
     margin-top: 5px;
-    
 }
 
 .btn {
@@ -30,22 +24,3 @@
     color: black;
 
 }
-
-#prevBtn {
-    background-color: #FFD6D4;
-}
-
-#nextBtn {
-    background-color: #FFD6D4;
-}
-
-#createTodoBtn {
-    background-color: #FFE08E;
-    color: black;
-    border: none;
-}
-
-#date {
-    text-align: center;
-}
-

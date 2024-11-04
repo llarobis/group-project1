@@ -87,64 +87,115 @@
          renderTodoList();
      }
  }
-
+//beginning of my code - LL 
  // Function to save the to-do list to local storage
- 
-
-document.addEventListener('DOMContentLoaded', function () {
+ document.addEventListener('DOMContentLoaded', function () {
     const assignName = document.querySelector('#modal-name');
     const addDescription = document.querySelector('#modal-description');
     const createButton = document.getElementById('create');
-    const addDate = document.querySelector ('#modal-date');
-    const modal = document.querySelector ('#my-modal');
-
-
-if (createButton) {
-    createButton.addEventListener('click', function (event) {
-        event.preventDefault();
-        
-       
-        const name = assignName.value;
-        const description = addDescription.value;
-        const date = addDate.value;
-
+    const addDate = document.querySelector('#modal-date');
+    const myList = document.querySelector('#my-list');
     
-        localStorage.setItem('modal-name', name);
-        localStorage.setItem('modal-description', description);
-        localStorage.setItem('modal-date', date);
-
-       
-
-        renderLastRegistered(); 
-        
-    });
-}
-
-
-
-    function renderLastRegistered() {
-        const name = localStorage.getItem('modal-name');
-        const description = localStorage.getItem('modal-description');
-        const date = localStorage.getItem('modal-date');
-
-    
-        assignName.textContent = name;
-        addDescription.textContent = description;
-        addDate.textContent = date;
-        
-    
-        console.log('Name:', name);
-        console.log('Description:', description);
-        console.log('Date', date);
+    // Function to retrieve the to-do list from localStorage
+    function getTodoList() {
+        const storedList = localStorage.getItem('todoList');
+        return storedList ? JSON.parse(storedList) : [];
     }
 
-    const readLocalStorage = function () {
-        const name = localStorage.getItem('modal-name');
-        console.log('Name from readLocalStorage:', name);
-    };
-    readLocalStorage();
+    // Function to save the to-do list to localStorage
+    function saveTodoList(todoList) {
+        localStorage.setItem('todoList', JSON.stringify(todoList));
+    }
+
+    // Function to add a new to-do item
+    function addTodoItem(name, description, date) {
+        const todoList = getTodoList();
+        const newItem = { name, description, date };
+        todoList.push(newItem);
+        saveTodoList(todoList);
+        renderTodoList();
+    }
+
+    // Event listener for the Create button
+    if (createButton) {
+        createButton.addEventListener('click', function (event) {
+            event.preventDefault();
+            const name = assignName.value.trim();
+            const description = addDescription.value.trim();
+            const date = addDate.value;
+
+            if (name && description && date) {
+                addTodoItem(date, name, description);
+                // Clear input fields after adding
+                assignName.value = '';
+                addDescription.value = '';
+                addDate.value = '';
+            } else {
+                alert('Please fill in all fields.');
+            }
+        });
+    }
+
+    // Function to render the to-do list
+    function renderTodoList(filterDay = null) {
+        myList.innerHTML = ''; // Clear existing list
+
+        const todoList = getTodoList();
+
+        // Filter by day if filterDay is provided
+        const filteredList = filterDay ? todoList.filter(item => {
+            const itemDate = new Date(item.date);
+            const dayName = itemDate.toLocaleString('en-US', { weekday: 'short' }).toLowerCase();
+            return dayName === filterDay.toLowerCase();
+        }) : todoList;
+
+        // Create list items for each to-do
+        filteredList.forEach((item, index) => {
+            const listItem = document.createElement('li');
+            listItem.classList.add('list-group-item'); // Add Bootstrap list group item class
+            listItem.innerHTML = `
+                <strong>${item.name}</strong>
+                <br>${item.description}<br>
+            `;
+            myList.appendChild(listItem);
+        });
+
+        // Update the displayed date header
+        const todoDate = document.getElementById('todoDate');
+        const today = new Date();
+        todoDate.textContent = `To-Do List for ${today.toLocaleDateString('en-US', { weekday: 'short', month: '2-digit', day: '2-digit', year: '2-digit' })}`;
+    }
+
+    // Function to handle day button clicks
+    function handleDayClick(event) {
+        const dayId = event.target.id;
+        const dayMap = {
+            monday: 'Mon',
+            tuesday: 'Tue',
+            wednesday: 'Wed',
+            thursday: 'Thu',
+            friday: 'Fri',
+            saturday: 'Sat',
+            sunday: 'Sun'
+        };
+        const selectedDay = dayMap[dayId];
+        renderTodoList(selectedDay);
+    }
+
+    // Attach event listeners to day buttons in the navbar
+    const dayButtons = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+    dayButtons.forEach(dayId => {
+        const button = document.getElementById(dayId);
+        if (button) {
+            button.addEventListener('click', handleDayClick);
+        }
+    });
+
+    // Initial render of the to-do list
+    renderTodoList();
 });
 
+//end of my code -LL
 
  // Event Listener for "Create New To-Do Item" Button
  document.getElementById("createTodoBtn").addEventListener("click", () => {
