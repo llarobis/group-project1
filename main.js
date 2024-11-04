@@ -90,10 +90,10 @@
 //beginning of my code - LL 
  // Function to save the to-do list to local storage
  document.addEventListener('DOMContentLoaded', function () {
+    const addDate = document.querySelector('#modal-date');
     const assignName = document.querySelector('#modal-name');
     const addDescription = document.querySelector('#modal-description');
     const createButton = document.getElementById('create');
-    const addDate = document.querySelector('#modal-date');
     const myList = document.querySelector('#my-list');
     
     // Function to retrieve the to-do list from localStorage
@@ -120,12 +120,12 @@
     if (createButton) {
         createButton.addEventListener('click', function (event) {
             event.preventDefault();
+            const date = addDate.value;
             const name = assignName.value.trim();
             const description = addDescription.value.trim();
-            const date = addDate.value;
 
             if (name && description && date) {
-                addTodoItem(date, name, description);
+                addTodoItem(name, description, date);
                 // Clear input fields after adding
                 assignName.value = '';
                 addDescription.value = '';
@@ -154,8 +154,19 @@
             const listItem = document.createElement('li');
             listItem.classList.add('list-group-item'); // Add Bootstrap list group item class
             listItem.innerHTML = `
-                <strong>${item.name}</strong>
-                <br>${item.description}<br>
+                <div class="container rounded align-content-center text-center mx-auto mb-2 px-0 py-0" style="background-color: #FFD6D4;">
+                    <div class="row justify-content-evenly mx-1 my-2 px-0" style="height: 48px;">
+                        <strong class="col-6 align-content-center text-start mx-1 px-1 py-0">${item.name}</strong>
+                        <button id="doneBtn" class="btn col text-white mx-1 px-1 py-0" style="background-color: #FF6962;">Mark Done</button>
+                        <button id="editBtn" class="btn col text-white mx-1 px-1 py-0" style="background-color: #FF6962;">Edit</button>
+                    </div>
+                    <div class="row text-start mx-1 my-2 px-0">
+                        <div class="row text-start mx-1 my-2 px-0">
+                            Description Preview:
+                            <br>${item.description}<br>
+                        </div>
+                    </div>
+                </div>
             `;
             myList.appendChild(listItem);
         });
