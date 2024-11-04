@@ -23,7 +23,7 @@ GIVEN I will use the to-do list to log my daily tasks.
 
 WHEN I click on the create button
 
-THEN a modal window will pop up showing entries where I can log the calendar date, name of task, and description
+THEN I will be able to create a to do item 
 
 WHEN I click on the create button, the date, name and description will be saved and displayed
 
@@ -34,11 +34,11 @@ WHEN I click on the EDIT button, it loads up the specific day of tasks I have ch
 THEN I am able to edit the contents 
 
 WHEN I hit the mark button
-THEN It will display that my tasks are done, and positive feedback will pop up
+THEN It will display that my tasks are done, and positive feedback will pop up through speech.
 
 # Process
 
-The technologies used were Github, Figma, Slack and Google Meets. The tasks and roles are broken down and assigned through Kanban, we were able to communicate to each other and delegate or help each other with specific tasks. We all brain stormed with the mockup, and decided we wanted to have a positivity theme, Ali searched up colors that evoke motivation, tranquility and optmism, Steven made the figma wireframe look very cohesive and eye catching. As a base, Ali worked on the HTML and configured Bootstrap, and when we had the base HTML, Lauren worked on the javascript for the modal and local storage. Ali and Steven both worked on enhancing the HTML and CSS and then we continued to trouble shoot our code while deploying frequently. 
+The technologies used were Github, Figma, Slack and Google Meets. The tasks and roles are broken down and assigned through Kanban, we were able to communicate to each other and delegate or help each other with specific tasks. We all brain stormed with the mockup, and decided we wanted to have a positivity theme, Ali searched up colors that evoke motivation, tranquility and optmism, Steven made the figma wireframe look very cohesive and eye catching. As a base, Ali worked on the HTML and configured Bootstrap, and when we had the base HTML, Lauren worked on the javascript and Ali refined the javascript. Ali and Steven both worked on enhancing the HTML and CSS and then we continued to trouble shoot our code while deploying frequently. 
 
 
 The challenges we had would probably be time management and figuring out specific things like github, javascript functionality and having conflicting code.
