@@ -1,220 +1,164 @@
- // Retrieve to-do items from local storage or initialize with an empty array
- let todoItems = JSON.parse(localStorage.getItem("todoItems")) || [];
+   // Retrieve to-do items from local storage or initialize with an empty array
+   let todoItems = JSON.parse(localStorage.getItem("todoItems")) || [];
 
- // Motivational messages for completion
- const messages = [
-     "Great!!! Now, keep going!!!",
-     "You're COOKING!!!",
-     "Proud of you, you're Awesome!!!",
-     "If superman existed, you'd be the one.",
-     "Your enemies are getting jealous.",
-     "Mama ain't raise no punk!!!",
-     "Atta boiii!",
-     "Yeah I see you my dude, yeah you goin places. Don't forget about us little people!",
-     "Oh you think you a hot shot now...getting things done left and right."
- ];
+   // Motivational messages for completion
+   const messages = [
+       "Great!!! Now, keep going!!!",
+       "You're COOKING!!!",
+       "Proud of you, you're Awesome!!!",
+       "If superman existed, you'd be the one!",
+       "Your enemies are getting jealous.",
+       "Mama ain't raise no punk!!!",
+       "Atta boiii!",
+       "Yeah I see you my dude, yeah you goin places. Don't forget about us little people!",
+       "Oh you think you a hot shot now...getting things done left and right."
 
- // Function to render the To-Do List
- function renderTodoList() {
-     const todoContainer = document.getElementById("todoContainer");
-     todoContainer.innerHTML = ""; // Clear existing items
-     todoItems.forEach((item, index) => {
-         const todoDiv = document.createElement("div");
-         todoDiv.className = "todo-item d-flex justify-content-between";
+   ];
 
-         const todoText = document.createElement("span");
-         todoText.innerText = item;
-         todoText.className = "flex-grow-1";
+   // Function to display Date
+   function displayDate() {
+        let date = new Date()
+        date = date.toString().split(" ")
+        document.querySelector("#date").innerHTML =  date[1] + " " + date[2] + " " + date[3]
+   }
 
-         // Complete button
-         const completeBtn = document.createElement("button");
-         completeBtn.className = "btn btn-success btn-sm";
-         completeBtn.innerText = "Complete";
-         completeBtn.onclick = () => completeTask(index);
+   window.onload = function() {
+    displayDate()
+   }
 
-         // Edit button
-         const editBtn = document.createElement("button");
-         editBtn.className = "btn btn-warning btn-sm ml-2";
-         editBtn.innerText = "Edit";
-         editBtn.onclick = () => editTodoItem(index);
+   // Function to render the To-Do List
+   function renderTodoList() {
+       const todoContainer = document.getElementById("todoContainer");
+       todoContainer.innerHTML = ""; // Clear existing items
+       todoItems.forEach((item, index) => {
+           const todoDiv = document.createElement("div");
+           todoDiv.className = "todo-item d-flex justify-content-between";
 
-         const buttonGroup = document.createElement("div");
-         buttonGroup.className = "btn-group btn-group-sm";
-         buttonGroup.appendChild(completeBtn);
-         buttonGroup.appendChild(editBtn);
+           const todoText = document.createElement("span");
+           todoText.innerText = item;
+           todoText.className = "flex-grow-1";
 
-         todoDiv.appendChild(todoText);
-         todoDiv.appendChild(buttonGroup);
-         todoContainer.appendChild(todoDiv);
-     });
- }
+           // Complete button
+           const completeBtn = document.createElement("button");
+           completeBtn.className = "btn btn-success btn-sm";
+           completeBtn.innerText = "Done";
+           completeBtn.onclick = () => completeTask(index);
 
- // Function to mark a to-do item as complete and delete it from the list
- function completeTask(index) {
-     // Remove the task from the list
-     todoItems.splice(index, 1);
+           // Edit button
+           const editBtn = document.createElement("button");
+           editBtn.className = "btn btn-warning btn-sm ml-2";
+           editBtn.innerText = "Edit";
+           editBtn.onclick = () => editTodoItem(index);
 
-     // Show a random motivational message
-    // const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-    // alert(randomMessage);
+           const buttonGroup = document.createElement("div");
+           buttonGroup.className = "btn-group btn-group-sm";
+           buttonGroup.appendChild(completeBtn);
+           buttonGroup.appendChild(editBtn);
 
+           todoDiv.appendChild(todoText);
+           todoDiv.appendChild(buttonGroup);
+           todoContainer.appendChild(todoDiv);
+       });
+   }
 
-    //voice-over random motivational message
-     const randomIndex = Math.floor(Math.random() * messages.length);
-     const message = messages[randomIndex];
- 
-     const synth = window.speechSynthesis;
-     const utterance = new SpeechSynthesisUtterance(message);
+   // Function to mark a to-do item as complete and delete it from the list
+   function completeTask(index) {
+       // Remove the task from the list
+       todoItems.splice(index, 1);
 
-     utterance.pitch = 1;
-     utterance.rate = 0.4;
-     utterance.volume = 1;
- 
-     synth.speak(utterance);
- 
-
-     // Save updated list to local storage and re-render the list
-     saveToLocalStorage();
-     renderTodoList();
- }
-
- // Function to edit a to-do item
- function editTodoItem(index) {
-     const newItem = prompt("Edit To-Do item:", todoItems[index]);
-     if (newItem !== null) {
-         todoItems[index] = newItem;
-         saveToLocalStorage(); // Save updated to-do list to local storage
-         renderTodoList();
-     }
- }
-//beginning of my code - LL 
- // Function to save the to-do list to local storage
- document.addEventListener('DOMContentLoaded', function () {
-    const assignName = document.querySelector('#modal-name');
-    const addDescription = document.querySelector('#modal-description');
-    const createButton = document.getElementById('create');
-    const addDate = document.querySelector('#modal-date');
-    const myList = document.querySelector('#my-list');
+       // Show a random motivational message
+       //const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+       //alert(randomMessage);
+       
+        const randomIndex = Math.floor(Math.random() * messages.length);
+        const message = messages[randomIndex];
     
-    // Function to retrieve the to-do list from localStorage
-    function getTodoList() {
-        const storedList = localStorage.getItem('todoList');
-        return storedList ? JSON.parse(storedList) : [];
-    }
+        const synth = window.speechSynthesis;
+        const utterance = new SpeechSynthesisUtterance(message);
 
-    // Function to save the to-do list to localStorage
-    function saveTodoList(todoList) {
-        localStorage.setItem('todoList', JSON.stringify(todoList));
-    }
+        utterance.pitch = 1;
+        utterance.rate = 0.4;
+        utterance.volume = 1;
+    
+        synth.speak(utterance);
+    
+       
+       // Save updated list to local storage and re-render the list
+       saveToLocalStorage();
+       renderTodoList();
+   }
 
-    // Function to add a new to-do item
-    function addTodoItem(name, description, date) {
-        const todoList = getTodoList();
-        const newItem = { name, description, date };
-        todoList.push(newItem);
-        saveTodoList(todoList);
-        renderTodoList();
-    }
+   // Function to edit a to-do item
+   function editTodoItem(index) {
+       const newItem = prompt("Edit To-Do item:", todoItems[index]);
+       if (newItem !== null) {
+           todoItems[index] = newItem;
+           saveToLocalStorage(); // Save updated to-do list to local storage
+           renderTodoList();
+       }
+   }
 
-    // Event listener for the Create button
-    if (createButton) {
-        createButton.addEventListener('click', function (event) {
-            event.preventDefault();
-            const name = assignName.value.trim();
-            const description = addDescription.value.trim();
-            const date = addDate.value;
+   // Function to save the to-do list to local storage
+   function saveToLocalStorage() {
+       localStorage.setItem("todoItems", JSON.stringify(todoItems));
+   }
 
-            if (name && description && date) {
-                addTodoItem(date, name, description);
-                // Clear input fields after adding
-                assignName.value = '';
-                addDescription.value = '';
-                addDate.value = '';
-            } else {
-                alert('Please fill in all fields.');
-            }
-        });
-    }
+   // Event Listener for "Create New To-Do Item" Button
+   document.getElementById("createTodoBtn").addEventListener("click", () => {
+       const newItem = prompt("Enter new To-Do item:");
+       if (newItem) {
+           todoItems.push(newItem);
+           saveToLocalStorage(); // Save updated list to local storage
+           renderTodoList();
+       }
+   });
 
-    // Function to render the to-do list
-    function renderTodoList(filterDay = null) {
-        myList.innerHTML = ''; // Clear existing list
+   // Event Listeners for Prev/Next Buttons (for example purposes)
+   //document.getElementById("prevBtn").addEventListener("click", () => {
+    //   alert("Go to previous week (functionality not implemented)");
+  // });
 
-        const todoList = getTodoList();
+   //document.getElementById("nextBtn").addEventListener("click", () => {
+   //    alert("Go to next week (functionality not implemented)");
+ //  });
 
-        // Filter by day if filterDay is provided
-        const filteredList = filterDay ? todoList.filter(item => {
-            const itemDate = new Date(item.date);
-            const dayName = itemDate.toLocaleString('en-US', { weekday: 'short' }).toLowerCase();
-            return dayName === filterDay.toLowerCase();
-        }) : todoList;
+   // Initial render
+   renderTodoList();
 
-        // Create list items for each to-do
-        filteredList.forEach((item, index) => {
-            const listItem = document.createElement('li');
-            listItem.classList.add('list-group-item'); // Add Bootstrap list group item class
-            listItem.innerHTML = `
-                <strong>${item.name}</strong>
-                <br>${item.description}<br>
-            `;
-            myList.appendChild(listItem);
-        });
+   
+ 
+ // Initial setup: set current week starting from today
+let currentDate = new Date();
 
-        // Update the displayed date header
-        const todoDate = document.getElementById('todoDate');
-        const today = new Date();
-        todoDate.textContent = `To-Do List for ${today.toLocaleDateString('en-US', { weekday: 'short', month: '2-digit', day: '2-digit', year: '2-digit' })}`;
-    }
+// Function to render the week range based on the current date
+function renderWeek() {
+    const weekDisplay = document.getElementById("weekLabel");
 
-    // Function to handle day button clicks
-    function handleDayClick(event) {
-        const dayId = event.target.id;
-        const dayMap = {
-            monday: 'Mon',
-            tuesday: 'Tue',
-            wednesday: 'Wed',
-            thursday: 'Thu',
-            friday: 'Fri',
-            saturday: 'Sat',
-            sunday: 'Sun'
-        };
-        const selectedDay = dayMap[dayId];
-        renderTodoList(selectedDay);
-    }
+    // Get the start and end dates of the current week
+    let startOfWeek = new Date(currentDate);
+    startOfWeek.setDate(currentDate.getDate() - currentDate.getDay()); // Set to Sunday
 
-    // Attach event listeners to day buttons in the navbar
-    const dayButtons = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
-    dayButtons.forEach(dayId => {
-        const button = document.getElementById(dayId);
-        if (button) {
-            button.addEventListener('click', handleDayClick);
-        }
-    });
+    let endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 6); // Set to Saturday
 
-    // Initial render of the to-do list
-    renderTodoList();
+    // Format the dates as "MM/DD" for display
+    const options = { month: '2-digit', day: '2-digit' };
+    weekDisplay.textContent = `${startOfWeek.toLocaleDateString(undefined, options)} - ${endOfWeek.toLocaleDateString(undefined, options)}`;
+}
+
+// Event listener for the "Next" button
+document.getElementById("nextBtn").addEventListener("click", () => {
+    // Move forward by 7 days
+    currentDate.setDate(currentDate.getDate() + 7);
+    renderWeek();
 });
 
-//end of my code -LL
+// Event listener for the "Prev" button
+document.getElementById("prevBtn").addEventListener("click", () => {
+    // Move back by 7 days
+    currentDate.setDate(currentDate.getDate() - 7);
+    renderWeek();
+});
 
- // Event Listener for "Create New To-Do Item" Button
- document.getElementById("createTodoBtn").addEventListener("click", () => {
-     const newItem = prompt("Enter new To-Do item:");
-     if (newItem) {
-         todoItems.push(newItem);
-         saveToLocalStorage(); // Save updated list to local storage
-         renderTodoList();
-     }
- });
-
- // Event Listeners for Prev/Next Buttons (for example purposes)
- document.getElementById("prevBtn").addEventListener("click", () => {
-     alert("Go to previous week (functionality not implemented)");
- });
-
- document.getElementById("nextBtn").addEventListener("click", () => {
-     alert("Go to next week (functionality not implemented)");
- });
-
- // Initial render
- renderTodoList();
+// Initial render of the current week
+renderWeek();
