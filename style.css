@@ -1,57 +1,54 @@
-*{
- font-family: cursive sans-serif;
-
+.main-page {
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
 }
-
-body{
-  background-color: rgba(255, 255, 255, 0);
-}
-
-
-input[type="date"]{
-  width: 100%;
+.weekly-view, .todo-list {
+  background-color: #fF6962;
+  border-radius: 8px;
   padding: 10px;
-  border: 1px solid;
-  border-radius: 5px;
-  font-size: 16px;
+  margin-bottom: 20px;
+}
+.todo-item {
+  border-bottom: 1px solid black;
+  padding: 8px 0;
+  background-color: #FFD6D4;
+  border-radius: 8px;
+  
+  margin-top: 5px;
+
+  
+}
+
+.btn {
+  background-color: aliceblue;
+  color: black;
+  border: none;
+  transition: 0.8s;
+}
+
+.btn:hover {
+  background-color: #FFD6D4;
+  color: black;
 
 }
 
-input[type="date"]:focus {
-  border-color: #FF6962;
-  outline: none;
-}
-
-input[type="text"]{
-  width: 100%;
-  padding: 10px;
-  border: 1px solid;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-
-input[type="text"]:focus{
-  border-color: #FF6962;
-  outline: none;
-}
-
-
-textarea[id="modal-description"]{
-  width: 100%;
-  padding: 10px;
-  border: 1px solid;
-  border-radius: 5px;
-  font-size: 16px;
-
-}
-
-textarea[id="modal-description"]:focus {
-  border-color: #ff808e;
-  outline: none;
-}
-
-
-.form-control{
+#prevBtn {
   background-color: #FFD6D4;
 }
+
+#nextBtn {
+  background-color: #FFD6D4;
+}
+
+#createTodoBtn {
+  background-color: #FFE08E;
+  color: black;
+  border: none;
+}
+
+#date {
+  text-align: center;
+
+}
+
