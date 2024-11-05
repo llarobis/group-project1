@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <div class="main-page">
     <h3 class="text-center">Things To Do</h3>
-
     <!-- Weekly View Section -->
     <div class="weekly-view text-center">
         <button id="prevBtn" class="btn btn-secondary btn-sm">Prev</button>
@@ -26,117 +25,24 @@
             <button id="satBtn"  class="btn btn-outline-primary btn-sm">Sat</button>
             <button id="sunBtn"  class="btn btn-outline-primary btn-sm">Sun</button>
         </div>
-
     </div>
-
     <!-- To-Do Creation Section -->
     <div class="text-center mb-3">
         <button id="createTodoBtn" class="btn btn-primary">Create New To Do Item</button>
     </div>
-
     <!-- To-Do List Section -->
     <div class="todo-list">
         <p class="font-weight-bold" id="date">To-Do List for: </p>
         <div id="todoContainer">
             <!-- To-do items will be added here dynamically -->
-
-        <!-- Calendar -->
-         <div class="mx-2 my-0 px-0 py-0">
-            <div class="container rounded align-content-center text-center mx-auto mb-4 px-0 py-0" style="background-color: #FF6962;">
-                <div class="row justify-content-evenly mx-1 my-2 px-0" style="height: 48px;">
-                    <button id="monday" class="btn bg-white col mx-1 px-1 py-0">MON</button>
-                    <button id="tuesday" class="btn bg-white col mx-1 px-1 py-0">TUE</button>
-                    <button id="wednesday" class="btn bg-white col mx-1 px-1 py-0">WED</button>
-                    <button id="thursday" class="btn bg-white col mx-1 px-1 py-0">THU</button>
-                    <button id="friday" class="btn bg-white col mx-1 px-1 py-0">FRI</button>
-                    <button id="saturday" class="btn bg-white col mx-1 px-1 py-0">SAT</button>
-                    <button id="sunday" class="btn bg-white col mx-1 px-1 py-0">SUN</button>
-                </div>
-            </div>
-         </div>
-        <!-- Create New To Do Item Button -->
-         <div class="container mx-auto mb-2 px-0 py-0">
-            <div class="row mx-2 my-0 px-0 py-0">
-                <!-- Button to trigger the Modal -->
-                <button id="createToDoItemBtn" type="button" class="btn p-2" data-bs-toggle="modal" data-bs-target="#createItem-modal" style="background-color: #FFE08E;">Create New To Do Item</button>
-            </div>
-         </div>
-         <!-- What a To Do Item Will Look Like -->
-          <div class="mx-2 my-0 px-0 py-0">
-            <div class="container rounded align-content-center text-center mx-auto mb-2 px-0 py-0" style="background-color: #FFD6D4;">
-                <div class="row justify-content-evenly mx-1 my-2 px-0" style="height: 48px;">
-                    <span id="display-name" class="col-6 text-start mx-1 px-1 py-0"></span>
-                    <button id="doneBtn" class="btn col text-white mx-1 px-1 py-0" style="background-color: #FF6962;">Mark Done</button>
-                    <button id="editBtn" class="btn col text-white mx-1 px-1 py-0" style="background-color: #FF6962;">Edit</button>
-                </div>
-                <div class="row text-start mx-1 my-2 px-0" style="height: 48px;">
-                    <div>Description Preview:</div>
-                    <div>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dignissimos neque dicta, accusamus eaque optio itaque beatae ipsam, fugiat quaerat voluptate nesciunt perspiciatis ad consequatur blanditiis animi sequi mollitia reiciendis ipsa?</div>
-                </div>
-              </div>
-          </div>
-          <ul id="my-list" class="mx-2 my-0 px-0 py-0"></ul>
-        <!-- To Do List Section -->
-        <div class="mx-2 my-0 px-0 py-0">
-            <div class="container rounded align-content-center text-center mx-auto mb-2 px-0 py-0" style="background-color: #ff6962;">
-                <div class="row justify-content-evenly mx-1 my-2 px-0">
-                    <p class="container rounded align-content-center text-center mx-auto mb-2 px-0 py-0" id="todoDate" style="color: #FFFFFF; height: 48px;">TUE 10/22/24</p>
-                    <div id="toDoContainer">
-                        <!-- To-do items will be added here dynamically -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mx-0">
-            <!-- Show all To Do Items for the selected calendar day -->
-        </div>
-        <!-- Modal - Create New To Do Item -->
-        <div class="modal fade" id="createItem-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modal-title" style="display: none" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable">
-                <div class="modal-content"  id="my-modal">
-                    <!-- Modal Header -->
-                    <div class="modal-header text-white" style="background-color: #FF6962;">
-                        <h1 class="modal-title mx-auto" id="modal-title">Create To Do Item</h1>
-                    </div>
-                    <!-- Modal Body -->
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="modal-date" class="form-label">Assign A Date</label>
-                            <input type="date" class="form-control" id="modal-date" placeholder="MM/DD/YYYY">
-                        </div>
-                        <div class="mb-3">
-                            <label for="modal-name" class="form-label">Assign A Name</label>
-                            <input type="text" class="form-control" id="modal-name" placeholder="e.g. Do laundry, Pack lunch, Meet with client, etc.">
-                        </div>
-                        <div class="mb-3">
-                            <label for="modal-description" class="form-label">Description</label>
-                            <textarea class="form-control" placeholder="Add a description here." id="modal-description"></textarea>
-                        </div>
-                    </div>
-                    <!-- Modal Footer -->
-                    <div class="modal-footer justify-content-evenly">
-                        <button type="button" id="create" class="btn text-white" style="background-color: #FF6962;" data-bs-dismiss="modal">Create</button>
-                        <button type="button" id="cancel" class="btn text-white" style="background-color: #FF6962;" data-bs-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 </div>
-
-
-   
 <script src="main.js"></script>
-
 </body>
-
 </html>
 
-<footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="main.js"></script>
-    
-</footer>
-</html>
+
+
+
 
