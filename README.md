@@ -48,3 +48,4 @@ The challenges we had would probably be time management and figuring out specifi
 
 # future development 
 https://www.figma.com/board/urbKRjRNl28CdZ2U0lf1Zz/Group-Project1-Backup?node-id=0-1&t=8TD0Hj4fRr52ovv9-1
+https://llarobis.github.io/group-project1/
