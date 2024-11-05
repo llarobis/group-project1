@@ -1,4 +1,7 @@
 
+
+
+
    // Retrieve to-do items from local storage or initialize with an empty array
    let todoItems = JSON.parse(localStorage.getItem("todoItems")) || [];
 
@@ -74,6 +77,11 @@
         const randomIndex = Math.floor(Math.random() * messages.length);
         const message = messages[randomIndex];
 
+    
+        const synth = window.speechSynthesis;
+        const utterance = new SpeechSynthesisUtterance(message);
+
+
  // Retrieve to-do items from local storage or initialize with an empty array
  let todoItems = JSON.parse(localStorage.getItem("todoItems")) || [];
 
@@ -142,12 +150,85 @@
      const synth = window.speechSynthesis;
      const utterance = new SpeechSynthesisUtterance(message);
 
-     utterance.pitch = 1;
-     utterance.rate = 0.4;
-     utterance.volume = 1;
+
+        utterance.pitch = 1;
+        utterance.rate = 0.4;
+        utterance.volume = 1;
+    
+        synth.speak(utterance);
+    
+       
+       // Save updated list to local storage and re-render the list
+       saveToLocalStorage();
+       renderTodoList();
+   }
+
+   // Function to edit a to-do item
+   function editTodoItem(index) {
+       const newItem = prompt("Edit To-Do item:", todoItems[index]);
+       if (newItem !== null) {
+           todoItems[index] = newItem;
+           saveToLocalStorage(); // Save updated to-do list to local storage
+           renderTodoList();
+       }
+   }
+
+   // Function to save the to-do list to local storage
+   function saveToLocalStorage() {
+       localStorage.setItem("todoItems", JSON.stringify(todoItems));
+   }
+
+   // Event Listener for "Create New To-Do Item" Button
+   document.getElementById("createTodoBtn").addEventListener("click", () => {
+       const newItem = prompt("Enter new To-Do item:");
+       if (newItem) {
+           todoItems.push(newItem);
+           saveToLocalStorage(); // Save updated list to local storage
+           renderTodoList();
+       }
+   });
+
+   // Event Listeners for Prev/Next Buttons (for example purposes)
+   //document.getElementById("prevBtn").addEventListener("click", () => {
+    //   alert("Go to previous week (functionality not implemented)");
+  // });
+
+   //document.getElementById("nextBtn").addEventListener("click", () => {
+   //    alert("Go to next week (functionality not implemented)");
+ //  });
+
+   // Initial render
+   renderTodoList();
+
+   
  
-     synth.speak(utterance);
- 
+ // Initial setup: set current week starting from today
+let currentDate = new Date();
+
+// Function to render the week range based on the current date
+function renderWeek() {
+    const weekDisplay = document.getElementById("weekLabel");
+
+    // Get the start and end dates of the current week
+    let startOfWeek = new Date(currentDate);
+    startOfWeek.setDate(currentDate.getDate() - currentDate.getDay()); // Set to Sunday
+
+    let endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 6); // Set to Saturday
+
+    // Format the dates as "MM/DD" for display
+    const options = { month: '2-digit', day: '2-digit' };
+    weekDisplay.textContent = `${startOfWeek.toLocaleDateString(undefined, options)} - ${endOfWeek.toLocaleDateString(undefined, options)}`;
+}
+
+// Event listener for the "Next" button
+document.getElementById("nextBtn").addEventListener("click", () => {
+    // Move forward by 7 days
+    currentDate.setDate(currentDate.getDate() + 7);
+    renderWeek();
+});
+
+
 
      // Save updated list to local storage and re-render the list
      saveToLocalStorage();
@@ -251,11 +332,18 @@ document.getElementById("nextBtn").addEventListener("click", () => {
     renderWeek();
 });
 
+
 // Event listener for the "Prev" button
 document.getElementById("prevBtn").addEventListener("click", () => {
     // Move back by 7 days
     currentDate.setDate(currentDate.getDate() - 7);
     renderWeek();
+
+});
+
+// Initial render of the current week
+renderWeek();
+
 });
 
 // Initial render of the current week
@@ -401,4 +489,5 @@ document.getElementById("sunBtn").addEventListener("click", () => {
 
  // Initial render
  renderTodoList();
+
 
